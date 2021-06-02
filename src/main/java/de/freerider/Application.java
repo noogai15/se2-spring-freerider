@@ -28,65 +28,56 @@ public class Application {
         Customer c4 = new Customer("Bohn", "Alf", "0133");
         Customer c5 = new Customer("Scholz", "Elke", "0178");
         
-        //
+        //Create Customer List and ID List
         ArrayList<Customer> cList = new ArrayList<>(Arrays.asList(c1, c2, c3, c4 ,c5));
         ArrayList<String> idList = new ArrayList<>();
-        
-        
-        
-        //TEST save / saveAll
+
+        //Saving the List of new Customers
         customerManager.saveAll(cList);
         
+        //Double-check Customers and add their newly given IDs to the ID List
         System.err.println("Customers:");
         for (Customer customer : cList) {
             System.err.println(customer.getId() + ": " + customer.getFirstName());
             idList.add(customer.getId());
         }
         
+        //Get the newly added Customers by their newly given IDs
+        Iterable<Customer> newCList = customerManager.findAllById(idList);
         
+        //Overwrite newCList (to test findAll)
+        newCList = customerManager.findAll();
         
-        
-        //TEST findAllById / findById
-        Iterable<Customer> testList = customerManager.findAllById(idList);
-        
-        //TEST existsById (should only print true)
-        for (Customer customer: testList) {
+        //Just to test existsByID; should only print "true"
+        for (Customer customer: newCList) {
             System.out.println(Boolean.toString(customerManager.existsById(customer.getId())));
         }
-        //TEST count: Should be 5
-        System.out.println(customerManager.count());
-        
-        
-        
-        
-        //TEST deletes---------
-        customerManager.deleteAll(testList); { //delete and deleteAll
-        
-        //TEST count: Should be 0
-        System.out.println(customerManager.count());
 
-        customerManager.saveAll(cList); //Re-add and TEST findAll
-        
-        //TEST count: Should be 5
+        //Testing the different delete methods, re-adding after each and counting in-between
+        //Counts should be changing between 5's and 0's
         System.out.println(customerManager.count());
         
-        customerManager.deleteAllById(idList); //deletebyId and deleteAllById
+        customerManager.deleteAll(newCList); { 
         
-        //TEST count: Should be 0
         System.out.println(customerManager.count());
         
-        customerManager.saveAll(cList); //Re-add and TEST findAll
-        
-        //TEST count: Should be 5
+        customerManager.saveAll(cList);
+
         System.out.println(customerManager.count());
         
-        customerManager.deleteAll(); //deleteAll
-        
-        //TEST count: Should be 0
+        customerManager.deleteAllById(idList);
+
         System.out.println(customerManager.count());
-        //TEST deletes---------
         
-        //TEST for if duplicates happen; should still be 5
+        customerManager.saveAll(cList); 
+
+        System.out.println(customerManager.count());
+        
+        customerManager.deleteAll();
+
+        System.out.println(customerManager.count());
+        
+        //Testing if duplicates happen; should still be 5
         customerManager.saveAll(cList);
         customerManager.saveAll(cList);
         System.out.println(customerManager.count());
