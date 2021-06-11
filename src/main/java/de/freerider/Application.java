@@ -22,11 +22,30 @@ public class Application {
         CrudRepository<Customer, String> customerManager = new CustomerRepository();
         
         //Create Customers
-        Customer c1 = new Customer("Mühlbauer", "Thomas", "0171");
-        Customer c2 = new Customer("Schmid", "Lisa", "0162");
-        Customer c3 = new Customer("Wolf", "Aldric", "0161");
-        Customer c4 = new Customer("Bohn", "Alf", "0133");
-        Customer c5 = new Customer("Scholz", "Elke", "0178");
+        Customer c1 = new Customer();
+        c1.setFirstName("Thomas");
+        c1.setLastName("Mühlbauer");
+        c1.setContact("0171");
+        
+        Customer c2 = new Customer();
+        c2.setFirstName("Lisa");
+        c2.setLastName("Schmid");
+        c2.setContact("0162");
+        
+        Customer c3 = new Customer();
+        c3.setFirstName("Wolf");
+        c3.setLastName("Aldric");
+        c3.setContact("0161");
+        
+        Customer c4 = new Customer();
+        c4.setFirstName("Bohn");
+        c4.setLastName("Alf");
+        c4.setContact("0133");        
+        
+        Customer c5 = new Customer();
+        c5.setFirstName("Elke");
+        c5.setLastName("Scholz");
+        c5.setContact("0178");
         
         //Create Customer List and ID List
         ArrayList<Customer> cList = new ArrayList<>(Arrays.asList(c1, c2, c3, c4 ,c5));
