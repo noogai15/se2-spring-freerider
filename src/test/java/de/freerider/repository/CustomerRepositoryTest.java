@@ -58,23 +58,44 @@ public class CustomerRepositoryTest {
         long count2 = instance.count();
         Optional<Customer> findResult = instance.findById(mats.getId());
         
-        //Regular Cases
         assertEquals(count1, count2 - 1);
         assertEquals(mats, saveResult);
         assertNotNull(mats.getId());
         assertEquals(instance.findById(mats.getId()), findResult);
         assertEquals(thomas.getId(), "thomasId");
         
-        //Special Cases
+    }
+    
+    @Test
+    public void testSave_Null(){
+        System.out.println("save Null");
+        CustomerRepository instance = new CustomerRepository();
         assertThrows(IllegalArgumentException.class, () -> {instance.save(null);});
+    }
+    
+    @Test
+    public void testSave_sameID() {
+        System.out.println("save same Id");
+        CustomerRepository instance = new CustomerRepository();
+        
         Customer c1 = new Customer();
         Customer c2 = new Customer();
         c1.setId("testId");
         c2.setId("testId");
         assertEquals(instance.save(c1), c1);
         assertEquals(instance.save(c2), c1); //c1 is replaced by c2 and c1 is returned
+    }
+    
+    @Test
+    public void testSave_sameTwice(){
+        System.out.println("save same Customer twice");
+        CustomerRepository instance = new CustomerRepository();
         
-        
+        long count1 = instance.count();
+        instance.save(mats);
+        instance.save(mats);
+        long count2 = instance.count();
+        assertEquals(count1, count2 - 1); //Only got added once
         
     }
     
@@ -92,9 +113,24 @@ public class CustomerRepositoryTest {
         assertEquals(saveResult, (List<Customer>) instance.saveAll(customers));
         assertNotNull(saveResult.get(0).getId());
         
-        //Special Cases
-        assertThrows(IllegalArgumentException.class, () -> {instance.saveAll(null);});
+    }
+    
+    @Test
+    public void testSaveAll_Null(){
+        System.out.println("saveAll Null");
+        CustomerRepository instance = new CustomerRepository();
         
+        assertThrows(IllegalArgumentException.class, () -> {instance.saveAll(null);});
+    }
+    
+    @Test
+    public void testSaveAll_Empty(){
+        System.out.println("saveAll empty");
+        CustomerRepository instance = new CustomerRepository();
+        
+        ArrayList<Customer> list = new ArrayList<>();
+        instance.saveAll(list);
+        assertEquals(0, instance.count());
     }
     
     //FIND TESTS///////////////////
@@ -108,12 +144,15 @@ public class CustomerRepositoryTest {
         Optional<Customer> expResult = Optional.ofNullable(instance.getAll().get(id));
         Optional<Customer> result = instance.findById(id);
         
-        //Regular Cases
         assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testFindById_Null() {
+        System.out.println("findById Null");
+        CustomerRepository instance = new CustomerRepository();
         
-        //Special Cases
         assertThrows(IllegalArgumentException.class, () -> {instance.findById(null);});
-        
     }
     
     @Test
@@ -163,10 +202,14 @@ public class CustomerRepositoryTest {
         
         //Regular Cases
         assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testFindAllById_Null(){
+        System.out.println("findAllById Null");
+        CustomerRepository instance = new CustomerRepository();
         
-        //Special Cases
         assertThrows(IllegalArgumentException.class, () -> {instance.findAllById(null);});
-
     }
     
     //COUNT TEST///////////////////
@@ -179,7 +222,6 @@ public class CustomerRepositoryTest {
         long expResult = 1L;
         long result = instance.count();
         
-        //Regular Cases
         assertEquals(expResult, result);
         
     }
@@ -196,13 +238,15 @@ public class CustomerRepositoryTest {
         instance.deleteById(id);
         long latterCount= instance.count();
         
-        //Regular Cases
         assertEquals(initCount - 1, latterCount);
+    }
+    
+    @Test
+    public void testDeleteById_Null() {
+        System.out.println("deleteById Null");
+        CustomerRepository instance = new CustomerRepository();
         
-        //Special Cases
         assertThrows(IllegalArgumentException.class, () -> {instance.deleteById(null);});
-
-        
     }
     
     @Test
@@ -215,13 +259,15 @@ public class CustomerRepositoryTest {
         instance.delete(mats);
         long latterCount= instance.count();
         
-        //Regular Cases
         assertEquals(initCount - 1, latterCount);
+    }
+    
+    @Test
+    public void testDelete_Null() {
+        System.out.println("delete Null");
+        CustomerRepository instance = new CustomerRepository();
         
-        //Special Cases
         assertThrows(IllegalArgumentException.class, () -> {instance.delete(null);});
-
-        
     }
     
     @Test
@@ -239,16 +285,19 @@ public class CustomerRepositoryTest {
         
         //Regular Cases
         assertEquals(initCount - 2, latterCount);
+    }
+    
+    @Test
+    public void testDeleteAllById_Null() {
+        System.out.println("deleteAllById  Null");
+        CustomerRepository instance = new CustomerRepository();
         
-        //Special Cases
         assertThrows(IllegalArgumentException.class, () -> {instance.deleteAllById(null);});
-
-        
     }
     
     @Test
     public void testDeleteAll_Iterable() {
-        System.out.println("deleteAll");
+        System.out.println("deleteAll (Iterable)");
         Iterable<? extends Customer> entities = customers;
         CustomerRepository instance = new CustomerRepository();
         instance.save(mats);
@@ -263,7 +312,15 @@ public class CustomerRepositoryTest {
         
         //Special Cases
         assertThrows(IllegalArgumentException.class, () -> {instance.deleteAll(null);});
-
+        
+    }
+    
+    @Test
+    public void testDeleteAll_Iterable_Null() {
+        System.out.println("deleteAll (Iterable) Null");
+        CustomerRepository instance = new CustomerRepository();
+        
+        assertThrows(IllegalArgumentException.class, () -> {instance.deleteAll(null);});
     }
     
     @Test
@@ -274,7 +331,7 @@ public class CustomerRepositoryTest {
         
         //Regular Cases
         assertEquals(instance.count(), 0);
-        
     }
+
     
 }
