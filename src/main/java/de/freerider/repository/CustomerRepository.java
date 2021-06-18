@@ -19,6 +19,7 @@ public class CustomerRepository implements CrudRepository<Customer, String> {
         if (entity == null) {
             throw new IllegalArgumentException("Entitiy can't be null");
         }
+        
         String newID = idGen.nextId();
         
         if (entity.getId() == null || entity.getId().isEmpty()) {
@@ -26,6 +27,13 @@ public class CustomerRepository implements CrudRepository<Customer, String> {
                 newID = idGen.nextId();
             }
             entity.setId(newID);
+        }
+        
+        if (existsById(entity.getId())){
+            Customer old = customers.get(entity.getId()); //Customer to be replaced
+            delete(old); //delete that Customer
+            customers.put(entity.getId(), entity); //Put in new Customer with same Id as the old one
+            return (S) old; //return the old Customer
         }
         
         customers.put(entity.getId(), entity);
@@ -60,10 +68,7 @@ public class CustomerRepository implements CrudRepository<Customer, String> {
         if (id == null) {
             throw new IllegalArgumentException("ID can't be null");
         }
-        if(customers.containsKey(id)) {
-            return true;
-        }
-        return false;
+        return customers.containsKey(id);
     }
     
     @Override
@@ -81,8 +86,10 @@ public class CustomerRepository implements CrudRepository<Customer, String> {
         ArrayList<Customer> c = new ArrayList<>();
         
         for (String id: ids) {
-            Optional<Customer> optional = findById(id);
-            c.add(optional.get());
+            if(!id.trim().equals("")){
+                Optional<Customer> optional = findById(id);
+                c.add(optional.get());
+            }
         }
         return c;
     }
@@ -103,7 +110,7 @@ public class CustomerRepository implements CrudRepository<Customer, String> {
     
     @Override
     public void delete(Customer entity) {
-        if (entity == null) {
+        if (entity == null || entity.getId() == null) {
             throw new IllegalArgumentException("Entity can't be null");
         }
         customers.remove(entity.getId());
@@ -132,6 +139,10 @@ public class CustomerRepository implements CrudRepository<Customer, String> {
     @Override
     public void deleteAll() {
         customers.clear();
+    }
+    
+    public HashMap<String, Customer> getAll() {
+        return customers;
     }
     
     

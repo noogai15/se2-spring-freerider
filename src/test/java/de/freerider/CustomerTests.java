@@ -2,6 +2,7 @@ package de.freerider;
         
 import de.freerider.model.Customer;
 import de.freerider.model.Customer.Status;
+import static org.junit.Assert.assertThrows;
         import org.junit.jupiter.api.AfterAll;
         import org.junit.jupiter.api.AfterEach;
         import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,8 +25,6 @@ public class CustomerTests {
         public void initialize(){
         mats = new Customer();
         thomas = new Customer();
-        
-        
         
         }
         

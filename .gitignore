@@ -1,5 +1,6 @@
 HELP.md
 target/
+nbproject/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -38,3 +39,4 @@ mvnw.cmd
 mvnw
 find_src.txt
 .mvn/
+/nbproject/
