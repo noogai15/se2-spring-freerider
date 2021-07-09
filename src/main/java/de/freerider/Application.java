@@ -1,6 +1,6 @@
 package de.freerider;
 
-import de.freerider.model.Customer;
+import de.freerider.datamodel.Customer;
 import de.freerider.repository.CrudRepository;
 import de.freerider.repository.CustomerRepository;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class Application {
         //Create Customers
         Customer c1 = new Customer();
         c1.setFirstName("Thomas");
-        c1.setLastName("Mühlbauer");
+        c1.setLastName("M�hlbauer");
         c1.setContact("0171");
         
         Customer c2 = new Customer();

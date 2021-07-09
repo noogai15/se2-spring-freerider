@@ -1,7 +1,7 @@
 package de.freerider;
         
-import de.freerider.model.Customer;
-import de.freerider.model.Customer.Status;
+import de.freerider.datamodel.Customer;
+import de.freerider.datamodel.Customer.Status;
 import static org.junit.Assert.assertThrows;
         import org.junit.jupiter.api.AfterAll;
         import org.junit.jupiter.api.AfterEach;
@@ -120,16 +120,16 @@ public class CustomerTests {
         //STATUS-TESTS
         @Test
         void testStatusInital() {
-            assertEquals(mats.getStatus(), Status.NEW);
-            assertEquals(thomas.getStatus(), Status.NEW);
+            assertEquals(mats.getStatus(), Status.New);
+            assertEquals(thomas.getStatus(), Status.New);
         }
         @Test
         void testSetStatus() {
-            mats.setStatus(Status.ACTIVE);  
-            thomas.setStatus(Status.ACTIVE);
+            mats.setStatus(Status.Active);  
+            thomas.setStatus(Status.Active);
             
-            assertEquals(mats.getStatus(), Status.ACTIVE);
-            assertEquals(thomas.getStatus(), Status.ACTIVE);            
+            assertEquals(mats.getStatus(), Status.Active);
+            assertEquals(thomas.getStatus(), Status.Active);            
             
         }
         

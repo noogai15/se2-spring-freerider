@@ -1,6 +1,5 @@
 package de.freerider.repository;
-
-import de.freerider.model.Customer;
+import de.freerider.datamodel.Customer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;

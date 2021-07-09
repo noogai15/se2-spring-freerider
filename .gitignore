@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 HELP.md
 target/
 nbproject/
@@ -6,17 +7,28 @@ nbproject/
 !**/src/test/**/target/
 
 ### STS ###
+=======
+
+### STS, eclipse ###
+>>>>>>> sgra64/datasource
 .apt_generated
 .classpath
 .factorypath
 .project
 .settings
+<<<<<<< HEAD
 .springBeans
+=======
+>>>>>>> sgra64/datasource
 .sts4-cache
 
 ### IntelliJ IDEA ###
 .idea
+<<<<<<< HEAD
 *.iwsF
+=======
+*.iws
+>>>>>>> sgra64/datasource
 *.iml
 *.ipr
 
@@ -26,13 +38,17 @@ nbproject/
 /dist/
 /nbdist/
 /.nb-gradle/
+<<<<<<< HEAD
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+=======
+>>>>>>> sgra64/datasource
 
 ### VS Code ###
 .vscode/
 
+<<<<<<< HEAD
 ls_la.txt
 spring_log.txt
 mvnw.cmd
@@ -40,3 +56,39 @@ mvnw
 find_src.txt
 .mvn/
 /nbproject/
+=======
+### ignore generated directories and compiled output ###
+out
+bin
+target
+**/*.class
+**/*.jar
+
+### ignore log files ###
+**/*.log
+
+### ignore Mac's .DS_Store files ###
+**/.DS_Store
+
+### ignore archives ###
+*.7z
+*.gz
+*.rar
+*.tar
+*.zip
+
+
+### maven compiled code ###
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### maven wrapper ###
+.mvn
+mvnw*
+>>>>>>> sgra64/datasource

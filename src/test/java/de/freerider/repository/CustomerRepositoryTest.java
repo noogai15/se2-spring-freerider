@@ -1,8 +1,9 @@
 package de.freerider.repository;
 
-import de.freerider.model.Customer;
+import de.freerider.datamodel.Customer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +36,7 @@ public class CustomerRepositoryTest {
     //For resetting
     @BeforeEach
     public void initialize(){
+     
         System.out.print("Re-initializing Customers\n");
         mats = new Customer(); //Mats won't have a custom ID
         thomas = new Customer(); //Thomas will have a custom ID
