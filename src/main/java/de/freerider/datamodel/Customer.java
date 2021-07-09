@@ -42,8 +42,9 @@ public class Customer {
     public boolean setId( final String id ) {
         if( this.id == null || id == null ) {	// set id only once or reset to null
             this.id = id;
+            return true;
         }
-        return true;
+        return false;
     }
     
     public String getLastName() {
